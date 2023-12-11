@@ -1,5 +1,6 @@
 package me.voten.betonquestitemsadder.objectives;
 
+import me.voten.betonquestitemsadder.Validator;
 import org.betonquest.betonquest.BetonQuest;
 import org.betonquest.betonquest.Instruction;
 import org.betonquest.betonquest.api.CountingObjective;
@@ -16,15 +17,15 @@ public class BlockObjective extends CountingObjective implements Listener {
 
     public BlockObjective(Instruction instruction, String notifyMessageName) throws InstructionParseException {
         super(instruction, notifyMessageName);
-        this.itemID = instruction.next();
-        this.targetAmount = instruction.getVarNum();
+        this.itemID = Validator.existingID(instruction.next());
+        this.targetAmount = Validator.notLessThanOne(instruction);
     }
 
-    protected void handle(String namespacedID, Player player, int amount) {
+    protected void handle(String namespacedID, Player player) {
         if (itemID.equals(namespacedID)) {
             OnlineProfile profile = PlayerConverter.getID(player);
             if (containsPlayer(profile) && checkConditions(profile)) {
-                getCountingData(profile).progress(amount);
+                getCountingData(profile).progress();
                 completeIfDoneOrNotify(profile);
             }
         }

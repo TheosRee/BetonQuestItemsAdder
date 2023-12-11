@@ -1,6 +1,7 @@
 package me.voten.betonquestitemsadder.conditions;
 
 import dev.lone.itemsadder.api.CustomStack;
+import me.voten.betonquestitemsadder.Validator;
 import org.betonquest.betonquest.Instruction;
 import org.betonquest.betonquest.VariableNumber;
 import org.betonquest.betonquest.api.Condition;
@@ -16,13 +17,8 @@ public abstract class ItemCondition extends Condition {
 
     public ItemCondition(Instruction instruction) throws InstructionParseException {
         super(instruction, true);
-        this.itemID = instruction.next();
-        String optionalAmount = instruction.getOptional("amount");
-        if (optionalAmount == null) {
-            this.amount = new VariableNumber(1);
-        } else {
-            this.amount = instruction.getVarNum();
-        }
+        this.itemID = Validator.existingID(instruction.next());
+        this.amount = Validator.notLessThanOne(instruction);
     }
 
     protected PlayerInventory getPlayerInventory(Profile profile) {

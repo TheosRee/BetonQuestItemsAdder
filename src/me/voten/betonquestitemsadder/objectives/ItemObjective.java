@@ -1,9 +1,9 @@
 package me.voten.betonquestitemsadder.objectives;
 
 import dev.lone.itemsadder.api.CustomStack;
+import me.voten.betonquestitemsadder.Validator;
 import org.betonquest.betonquest.BetonQuest;
 import org.betonquest.betonquest.Instruction;
-import org.betonquest.betonquest.VariableNumber;
 import org.betonquest.betonquest.api.CountingObjective;
 import org.betonquest.betonquest.api.profiles.OnlineProfile;
 import org.betonquest.betonquest.exceptions.InstructionParseException;
@@ -19,13 +19,8 @@ public class ItemObjective extends CountingObjective implements Listener {
 
     public ItemObjective(Instruction instruction, String notifyMessageName) throws InstructionParseException {
         super(instruction, notifyMessageName);
-        this.itemID = instruction.next();
-        String number = instruction.getOptional("amount");
-        if (number == null) {
-            this.targetAmount = new VariableNumber(1);
-        } else {
-            this.targetAmount = instruction.getVarNum(number);
-        }
+        this.itemID = Validator.existingID(instruction.next());
+        this.targetAmount = Validator.notLessThanOne(instruction);
     }
 
     protected void handle(ItemStack itemStack, Player player) {

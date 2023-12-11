@@ -1,6 +1,7 @@
 package me.voten.betonquestitemsadder.events;
 
 import dev.lone.itemsadder.api.CustomStack;
+import me.voten.betonquestitemsadder.Validator;
 import org.betonquest.betonquest.Instruction;
 import org.betonquest.betonquest.VariableNumber;
 import org.betonquest.betonquest.api.QuestEvent;
@@ -25,13 +26,8 @@ public class ItemEvent extends QuestEvent {
     public ItemEvent(Instruction instruction) throws InstructionParseException {
         super(instruction, true);
         this.action = instruction.getEnum(Action.class);
-        this.itemID = instruction.next();
-        String optionalAmount = instruction.getOptional("amount");
-        if (optionalAmount == null) {
-            this.amount = new VariableNumber(1);
-        } else {
-            this.amount = instruction.getVarNum(optionalAmount);
-        }
+        this.itemID = Validator.existingID(instruction.next());
+        this.amount = Validator.notLessThanOne(instruction);
     }
 
     @Override

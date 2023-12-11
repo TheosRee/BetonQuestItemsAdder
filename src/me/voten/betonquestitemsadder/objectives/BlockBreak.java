@@ -13,7 +13,7 @@ public class BlockBreak extends BlockObjective {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onBlockBreak(CustomBlockBreakEvent event) {
-        handle(event.getNamespacedID(), event.getPlayer(), 1);
+        handle(event.getNamespacedID(), event.getPlayer());
     }
 
 }

@@ -13,7 +13,7 @@ public class BlockPlace extends BlockObjective {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onPlaceBlock(CustomBlockPlaceEvent event) {
-        handle(event.getNamespacedID(), event.getPlayer(), 1);
+        handle(event.getNamespacedID(), event.getPlayer());
     }
 
 }

@@ -2,6 +2,7 @@ package me.voten.betonquestitemsadder.events;
 
 import dev.lone.itemsadder.api.CustomBlock;
 import dev.lone.itemsadder.api.CustomStack;
+import me.voten.betonquestitemsadder.Validator;
 import org.betonquest.betonquest.Instruction;
 import org.betonquest.betonquest.api.QuestEvent;
 import org.betonquest.betonquest.api.profiles.Profile;
@@ -19,7 +20,7 @@ public class SetBlockAt extends QuestEvent {
         super(instruction, true);
         staticness = true;
         persistent = true;
-        this.itemID = instruction.next();
+        this.itemID = Validator.existingID(instruction.next());
         this.location = instruction.getLocation();
     }
 
