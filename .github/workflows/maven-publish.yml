@@ -52,7 +52,7 @@ jobs:
           REPOSITORY_URL: ${{ vars.REPOSITORY_URL }}
 
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn clean deploy -DaltDeploymentRepository=releaseRepository::default::$REPOSITORY_URL
+        run: mvn clean deploy -DaltDeploymentRepository=releaseRepository::default::https://github.com/TheosRee/BetonQuestItemsAdder
         env:
           REPOSITORY_URL: ${{ vars.REPOSITORY_URL }}
           GITHUB_TOKEN: ${{ github.token }}
