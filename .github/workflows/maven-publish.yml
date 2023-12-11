@@ -12,6 +12,10 @@ on:
     branches:
       - test_deploy
 
+env:
+  # Setting an environment variable with the value of a configuration variable
+  env_var: ${{ vars.ENV_CONTEXT_VAR }}
+
 jobs:
   build:
 
@@ -34,8 +38,21 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
+      - name: Use variables
+        run: |
+          echo "repository variable : $REPOSITORY_VAR"
+          echo "organization variable : $ORGANIZATION_VAR"
+          echo "overridden variable : $OVERRIDE_VAR"
+          echo "variable from shell environment : $env_var"
+          echo "variable from repo : $REPOSITORY_URL"
+        env:
+          REPOSITORY_VAR: ${{ vars.REPOSITORY_VAR }}
+          ORGANIZATION_VAR: ${{ vars.ORGANIZATION_VAR }}
+          OVERRIDE_VAR: ${{ vars.OVERRIDE_VAR }}
+          REPOSITORY_URL: ${{ vars.REPOSITORY_URL }}
+
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn clean deploy -s $GITHUB_WORKSPACE/settings.xml -DaltDeploymentRepository=releaseRepository::default::${{ vars.REPOSITORY_URL }}
+        run: mvn clean deploy -DaltDeploymentRepository=releaseRepository::default::$REPOSITORY_URL
         env:
           REPOSITORY_URL: ${{ vars.REPOSITORY_URL }}
           GITHUB_TOKEN: ${{ github.token }}
