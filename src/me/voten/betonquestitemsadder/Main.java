@@ -4,6 +4,7 @@ import me.voten.betonquestitemsadder.conditions.HasItemInHand;
 import me.voten.betonquestitemsadder.conditions.HasItems;
 import me.voten.betonquestitemsadder.conditions.IsBlock;
 import me.voten.betonquestitemsadder.conditions.WearItems;
+import me.voten.betonquestitemsadder.events.ItemEvent;
 import me.voten.betonquestitemsadder.events.PlayAnimation;
 import me.voten.betonquestitemsadder.events.SetBlockAt;
 import me.voten.betonquestitemsadder.objectives.*;
@@ -29,8 +30,7 @@ public class Main extends JavaPlugin {
         betonQuest.registerConditions("hasiteminhand", HasItemInHand.class);
         betonQuest.registerConditions("isblock", IsBlock.class);
         //events
-        betonQuest.registerEvents("removeitems", RemoveItems.class);
-        betonQuest.registerEvents("giveitems", GiveItems.class);
+        betonQuest.registerEvents("removeitems", ItemEvent.class);
         betonQuest.registerEvents("setblockat", SetBlockAt.class);
         betonQuest.registerEvents("playanimation", PlayAnimation.class);
         //objectives

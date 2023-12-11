@@ -1,26 +1,24 @@
 package me.voten.betonquestitemsadder.events;
 
 import dev.lone.itemsadder.api.ItemsAdder;
-import pl.betoncraft.betonquest.Instruction;
-import pl.betoncraft.betonquest.api.QuestEvent;
-import pl.betoncraft.betonquest.exceptions.InstructionParseException;
-import pl.betoncraft.betonquest.exceptions.QuestRuntimeException;
-import pl.betoncraft.betonquest.utils.PlayerConverter;
+import org.betonquest.betonquest.Instruction;
+import org.betonquest.betonquest.api.QuestEvent;
+import org.betonquest.betonquest.api.profiles.Profile;
+import org.betonquest.betonquest.exceptions.InstructionParseException;
+import org.betonquest.betonquest.exceptions.QuestRuntimeException;
 
-public class PlayAnimation extends QuestEvent{
+public class PlayAnimation extends QuestEvent {
+    private final String name;
+    
+    public PlayAnimation(Instruction instruction) throws InstructionParseException {
+        super(instruction, true);
+        this.name = instruction.next();
+    }
 
-	private final String name;
-	
-	@SuppressWarnings("deprecation")
-	public PlayAnimation(Instruction instruction) throws InstructionParseException {
-		super(instruction);
-		this.name = instruction.next();
-	}
-
-	@Override
-	protected Void execute(String playerID) throws QuestRuntimeException {
-		ItemsAdder.playTotemAnimation(PlayerConverter.getPlayer(playerID), this.name);
-		return null;
-	}
+    @Override
+    protected Void execute(Profile profile) throws QuestRuntimeException {
+        ItemsAdder.playTotemAnimation(profile.getOnlineProfile().orElseThrow().getPlayer(), name);
+        return null;
+    }
 
 }
