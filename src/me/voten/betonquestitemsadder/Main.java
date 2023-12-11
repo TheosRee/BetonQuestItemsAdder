@@ -35,7 +35,7 @@ public class Main extends JavaPlugin {
         betonQuest.registerEvents("iaplayanimation", PlayAnimation.class);
         //objectives
         betonQuest.registerObjectives("iacraft", CraftingItem.class);
-        betonQuest.registerObjectives("iapickupitems", PickupItem.class);
+        betonQuest.registerObjectives("iapickup", PickupItem.class);
         betonQuest.registerObjectives("iablockbreak", BlockBreak.class);
         betonQuest.registerObjectives("iablockplace", BlockPlace.class);
         betonQuest.registerObjectives("iaenchantitem", EnchantItem.class);
