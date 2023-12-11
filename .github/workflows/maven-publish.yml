@@ -8,6 +8,9 @@ concurrency: production
 on:
   release:
     types: [ created ]
+  push:
+    branches:
+      - test_deploy
 
 jobs:
   build:
@@ -32,7 +35,7 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        run: mvn clean deploy -s $GITHUB_WORKSPACE/settings.xml -DaltDeploymentRepository=releaseRepository::default::${{ vars.REPOSITORY_URL }}
         env:
           REPOSITORY_URL: ${{ vars.REPOSITORY_URL }}
           GITHUB_TOKEN: ${{ github.token }}
