@@ -25,21 +25,21 @@ public class Main extends JavaPlugin {
 
         BetonQuest betonQuest = BetonQuest.getInstance();
         //conditions
-        betonQuest.registerConditions("hasitems", HasItems.class);
-        betonQuest.registerConditions("wearitems", WearItems.class);
-        betonQuest.registerConditions("hasiteminhand", HasItemInHand.class);
-        betonQuest.registerConditions("isblock", IsBlock.class);
+        betonQuest.registerConditions("iahasitems", HasItems.class);
+        betonQuest.registerConditions("iawearitems", WearItems.class);
+        betonQuest.registerConditions("iahasiteminhand", HasItemInHand.class);
+        betonQuest.registerConditions("iaisblock", IsBlock.class);
         //events
-        betonQuest.registerEvents("removeitems", ItemEvent.class);
-        betonQuest.registerEvents("setblockat", SetBlockAt.class);
-        betonQuest.registerEvents("playanimation", PlayAnimation.class);
+        betonQuest.registerEvents("iaremoveitems", ItemEvent.class);
+        betonQuest.registerEvents("iasetblockat", SetBlockAt.class);
+        betonQuest.registerEvents("iaplayanimation", PlayAnimation.class);
         //objectives
-        betonQuest.registerObjectives("craftitems", CraftingItem.class);
-        betonQuest.registerObjectives("pickupitems", PickupItem.class);
-        betonQuest.registerObjectives("blockbreak", BlockBreak.class);
-        betonQuest.registerObjectives("blockplace", BlockPlace.class);
-        betonQuest.registerObjectives("enchantitem", EnchantItem.class);
-        betonQuest.registerObjectives("smeltingitems", SmeltingItem.class);
+        betonQuest.registerObjectives("iacraftitems", CraftingItem.class);
+        betonQuest.registerObjectives("iapickupitems", PickupItem.class);
+        betonQuest.registerObjectives("iablockbreak", BlockBreak.class);
+        betonQuest.registerObjectives("iablockplace", BlockPlace.class);
+        betonQuest.registerObjectives("iaenchantitem", EnchantItem.class);
+        betonQuest.registerObjectives("iasmeltingitems", SmeltingItem.class);
 
         getLogger().info("Plugin Successful Enabled");
     }
