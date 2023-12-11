@@ -25,16 +25,16 @@ public class Main extends JavaPlugin {
 
         BetonQuest betonQuest = BetonQuest.getInstance();
         //conditions
-        betonQuest.registerConditions("iahasitems", HasItems.class);
-        betonQuest.registerConditions("iawearitems", WearItems.class);
-        betonQuest.registerConditions("iahasiteminhand", HasItemInHand.class);
-        betonQuest.registerConditions("iaisblock", IsBlock.class);
+        betonQuest.registerConditions("iaitem", HasItems.class);
+        betonQuest.registerConditions("iawear", WearItems.class);
+        betonQuest.registerConditions("iahand", HasItemInHand.class);
+        betonQuest.registerConditions("iablockat", IsBlock.class);
         //events
-        betonQuest.registerEvents("iaremoveitems", ItemEvent.class);
-        betonQuest.registerEvents("iasetblockat", SetBlockAt.class);
+        betonQuest.registerEvents("iaitem", ItemEvent.class);
+        betonQuest.registerEvents("iablockat", SetBlockAt.class);
         betonQuest.registerEvents("iaplayanimation", PlayAnimation.class);
         //objectives
-        betonQuest.registerObjectives("iacraftitems", CraftingItem.class);
+        betonQuest.registerObjectives("iacraft", CraftingItem.class);
         betonQuest.registerObjectives("iapickupitems", PickupItem.class);
         betonQuest.registerObjectives("iablockbreak", BlockBreak.class);
         betonQuest.registerObjectives("iablockplace", BlockPlace.class);
