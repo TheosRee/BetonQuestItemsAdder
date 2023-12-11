@@ -6,4 +6,3 @@ main: me.voten.betonquestitemsadder.Main
 version: ${project.version}
 api-version: 1.18
 depend: [ ItemsAdder,BetonQuest ]
-load: STARTUP
