@@ -1,29 +1,15 @@
-# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
-# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
-
-name: Maven Package
-
-concurrency: production
+name: Releases
 
 on:
-  release:
-    types: [ created ]
   push:
-    branches:
-      - test_deploy
-
-env:
-  # Setting an environment variable with the value of a configuration variable
-  env_var: ${{ vars.ENV_CONTEXT_VAR }}
+    tags:
+      - 'v*'
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      packages: write
-
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -32,27 +18,9 @@ jobs:
           java-version: '17'
           distribution: 'oracle'
           cache: maven
-          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-          settings-path: ${{ github.workspace }} # location for the settings.xml file
-
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-
-      - name: Use variables
-        run: |
-          echo "repository variable : $REPOSITORY_VAR"
-          echo "organization variable : $ORGANIZATION_VAR"
-          echo "overridden variable : $OVERRIDE_VAR"
-          echo "variable from shell environment : $env_var"
-          echo "variable from repo : $REPOSITORY_URL"
-        env:
-          REPOSITORY_VAR: ${{ vars.REPOSITORY_VAR }}
-          ORGANIZATION_VAR: ${{ vars.ORGANIZATION_VAR }}
-          OVERRIDE_VAR: ${{ vars.OVERRIDE_VAR }}
-          REPOSITORY_URL: ${{ vars.REPOSITORY_URL }}
-
-      - name: Publish to GitHub Packages Apache Maven
-        run: mvn clean deploy -DaltDeploymentRepository=releaseRepository::default::https://github.com/TheosRee/BetonQuestItemsAdder
-        env:
-          REPOSITORY_URL: ${{ vars.REPOSITORY_URL }}
-          GITHUB_TOKEN: ${{ github.token }}
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "target/betonquestitemsadder-*-*.jar"
+          bodyFile: "CHANGELOG.md"
