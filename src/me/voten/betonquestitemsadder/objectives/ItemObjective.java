@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 public class ItemObjective extends CountingObjective implements Listener {
     protected final String itemID;
@@ -23,7 +24,7 @@ public class ItemObjective extends CountingObjective implements Listener {
         this.targetAmount = Validator.notLessThanOne(instruction);
     }
 
-    protected void handle(ItemStack itemStack, Player player) {
+    protected void handle(@Nullable ItemStack itemStack, Player player) {
         CustomStack customStack = CustomStack.byItemStack(itemStack);
         if (customStack != null && itemID.equals(customStack.getNamespacedID())) {
             OnlineProfile profile = PlayerConverter.getID(player);
