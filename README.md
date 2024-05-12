@@ -79,14 +79,14 @@
     <li>
         <i>'iapickup &lt;itemID> [amount:x] [notify]'</i>
         <ul>
-            <span style="color: #8000ff"><i>e.g. 'iapickup itemsadder:ruby 3 notify'</i></span><br>
+            <span style="color: #8000ff"><i>e.g. 'iapickup itemsadder:ruby amount:3 notify'</i></span><br>
             <b>To complete this objective you need to pick up the specified amount of items</b>
         </ul>
     </li>
     <li>
         <i>'iablockbreak &lt;blockID> [amount:x] [notify:number]'</i>
         <ul>
-            <span style="color: #8000ff"><i>e.g. iablockbreak itemsadder:ruby_ore 5 notify:1'</i></span><br>
+            <span style="color: #8000ff"><i>e.g. iablockbreak itemsadder:ruby_ore amount:5 notify:1'</i></span><br>
             <b>To complete this objective player must break specified amount of blocks</b>
         </ul>
     </li>
