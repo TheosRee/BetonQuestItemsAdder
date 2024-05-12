@@ -9,6 +9,7 @@ import org.betonquest.betonquest.api.profiles.Profile;
 import org.betonquest.betonquest.exceptions.InstructionParseException;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 public abstract class ItemCondition extends Condition {
     protected final String itemID;
@@ -25,8 +26,11 @@ public abstract class ItemCondition extends Condition {
         return profile.getOnlineProfile().orElseThrow().getPlayer().getInventory();
     }
 
-    protected boolean isItem(ItemStack itemStack) {
+    protected boolean isItem(@Nullable ItemStack itemStack) {
         CustomStack customStack = CustomStack.byItemStack(itemStack);
+        if (customStack == null) {
+            return false;
+        }
         return customStack.getNamespacedID().equals(itemID);
     }
 
