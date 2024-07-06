@@ -6,6 +6,7 @@ import org.betonquest.betonquest.Instruction;
 import org.betonquest.betonquest.api.CountingObjective;
 import org.betonquest.betonquest.api.profiles.OnlineProfile;
 import org.betonquest.betonquest.exceptions.InstructionParseException;
+import org.betonquest.betonquest.instruction.variable.VariableNumber;
 import org.betonquest.betonquest.utils.PlayerConverter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -18,7 +19,7 @@ public class BlockObjective extends CountingObjective implements Listener {
     public BlockObjective(Instruction instruction, String notifyMessageName) throws InstructionParseException {
         super(instruction, notifyMessageName);
         this.itemID = Validator.existingID(instruction.next());
-        this.targetAmount = Validator.notLessThanOne(instruction);
+        this.targetAmount = instruction.getVarNum(instruction.getOptional("amount", "1"), VariableNumber.NOT_LESS_THAN_ONE_CHECKER);
     }
 
     protected void handle(String namespacedID, Player player) {

@@ -16,7 +16,7 @@ public class HasItemInHand extends ItemCondition {
         ItemStack hand = getPlayerInventory(profile).getItemInMainHand();
 
         if (isItem(hand)) {
-            int neededAmount = amount.getInt(profile);
+            int neededAmount = amount.getValue(profile).intValue();
             return hand.getAmount() >= neededAmount;
         }
 

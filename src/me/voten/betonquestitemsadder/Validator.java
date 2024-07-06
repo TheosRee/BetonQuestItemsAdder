@@ -1,8 +1,6 @@
 package me.voten.betonquestitemsadder;
 
 import dev.lone.itemsadder.api.CustomStack;
-import org.betonquest.betonquest.Instruction;
-import org.betonquest.betonquest.VariableNumber;
 import org.betonquest.betonquest.exceptions.InstructionParseException;
 
 /**
@@ -11,21 +9,6 @@ import org.betonquest.betonquest.exceptions.InstructionParseException;
 public final class Validator {
     private Validator() {
 
-    }
-
-    /**
-     * Gets a new variable number with "amount" as key
-     *
-     * @param instruction to get value from
-     * @return the new number
-     * @throws InstructionParseException if number is explicit less than one
-     */
-    public static VariableNumber notLessThanOne(Instruction instruction) throws InstructionParseException {
-        VariableNumber number = instruction.getVarNum(instruction.getOptional("amount", "1"));
-        if (number.isExplicitLessThanOne()) {
-            throw new InstructionParseException("Amount cannot be less than 1");
-        }
-        return number;
     }
 
     /**

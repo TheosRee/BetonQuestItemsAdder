@@ -6,12 +6,12 @@ import org.betonquest.betonquest.api.Condition;
 import org.betonquest.betonquest.api.profiles.Profile;
 import org.betonquest.betonquest.exceptions.InstructionParseException;
 import org.betonquest.betonquest.exceptions.QuestRuntimeException;
-import org.betonquest.betonquest.utils.location.CompoundLocation;
+import org.betonquest.betonquest.instruction.variable.location.VariableLocation;
 
 public class IsBlock extends Condition {
     protected final String itemID;
 
-    protected final CompoundLocation location;
+    protected final VariableLocation location;
 
     public IsBlock(Instruction instruction) throws InstructionParseException {
         super(instruction, true);
@@ -23,7 +23,7 @@ public class IsBlock extends Condition {
 
     @Override
     protected Boolean execute(Profile profile) throws QuestRuntimeException {
-        CustomBlock block = CustomBlock.byAlreadyPlaced(location.getLocation(profile).getBlock());
+        CustomBlock block = CustomBlock.byAlreadyPlaced(location.getValue(profile).getBlock());
         if (block != null) {
             return block.getCustomStack().getNamespacedID().equals(itemID);
         }

@@ -3,11 +3,11 @@ package me.voten.betonquestitemsadder.events;
 import dev.lone.itemsadder.api.CustomStack;
 import me.voten.betonquestitemsadder.Validator;
 import org.betonquest.betonquest.Instruction;
-import org.betonquest.betonquest.VariableNumber;
 import org.betonquest.betonquest.api.QuestEvent;
 import org.betonquest.betonquest.api.profiles.Profile;
 import org.betonquest.betonquest.exceptions.InstructionParseException;
 import org.betonquest.betonquest.exceptions.QuestRuntimeException;
+import org.betonquest.betonquest.instruction.variable.VariableNumber;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -27,7 +27,7 @@ public class ItemEvent extends QuestEvent {
         super(instruction, true);
         this.action = instruction.getEnum(Action.class);
         this.itemID = Validator.existingID(instruction.next());
-        this.amount = Validator.notLessThanOne(instruction);
+        this.amount = instruction.getVarNum(instruction.getOptional("amount", "1"), VariableNumber.NOT_LESS_THAN_ONE_CHECKER);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ItemEvent extends QuestEvent {
             throw new QuestRuntimeException("Invalid ItemsAdder Item: " + itemID);
         }
         ItemStack itemStack = customStack.getItemStack();
-        itemStack.setAmount(amount.getInt(profile));
+        itemStack.setAmount(amount.getValue(profile).intValue());
         Player player = profile.getOnlineProfile().orElseThrow().getPlayer();
         PlayerInventory inventory = player.getInventory();
         switch (action) {

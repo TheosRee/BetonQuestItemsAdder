@@ -8,13 +8,13 @@ import org.betonquest.betonquest.api.QuestEvent;
 import org.betonquest.betonquest.api.profiles.Profile;
 import org.betonquest.betonquest.exceptions.InstructionParseException;
 import org.betonquest.betonquest.exceptions.QuestRuntimeException;
-import org.betonquest.betonquest.utils.location.CompoundLocation;
+import org.betonquest.betonquest.instruction.variable.location.VariableLocation;
 import org.bukkit.Location;
 
 public class SetBlockAt extends QuestEvent {
     private final String itemID;
 
-    private final CompoundLocation location;
+    private final VariableLocation location;
 
     public SetBlockAt(Instruction instruction) throws InstructionParseException {
         super(instruction, true);
@@ -26,7 +26,7 @@ public class SetBlockAt extends QuestEvent {
 
     @Override
     protected Void execute(Profile profile) throws QuestRuntimeException {
-        Location loc = location.getLocation(profile);
+        Location loc = location.getValue(profile);
         CustomStack customStack = CustomStack.getInstance(itemID);
         if (customStack == null) {
             throw new QuestRuntimeException("Invalid ItemsAdder Item: " + itemID);

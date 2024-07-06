@@ -14,7 +14,7 @@ public class HasItems extends ItemCondition {
     @Override
     protected Boolean execute(Profile profile) throws QuestRuntimeException {
         ItemStack[] inventoryItems = getPlayerInventory(profile).getContents();
-        int neededAmount = amount.getInt(profile);
+        int neededAmount = amount.getValue(profile).intValue();
         int actualAmount = 0;
 
         for (ItemStack item : inventoryItems) {

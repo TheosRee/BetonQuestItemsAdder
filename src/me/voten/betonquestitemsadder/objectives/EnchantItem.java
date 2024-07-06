@@ -27,7 +27,7 @@ public class EnchantItem extends Objective implements Listener {
     public EnchantItem(Instruction instruction) throws InstructionParseException {
         super(instruction);
         this.itemID = instruction.next();
-        this.enchantments = instruction.getList(EnchantmentData::convert);
+        this.enchantments = instruction.getList(string -> string != null ? EnchantmentData.convert(string) : null);
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
