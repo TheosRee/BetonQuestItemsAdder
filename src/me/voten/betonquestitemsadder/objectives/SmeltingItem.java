@@ -1,9 +1,9 @@
 package me.voten.betonquestitemsadder.objectives;
 
-import org.betonquest.betonquest.Instruction;
-import org.betonquest.betonquest.api.profiles.OnlineProfile;
-import org.betonquest.betonquest.exceptions.InstructionParseException;
-import org.betonquest.betonquest.utils.PlayerConverter;
+import org.betonquest.betonquest.BetonQuest;
+import org.betonquest.betonquest.api.profile.OnlineProfile;
+import org.betonquest.betonquest.api.quest.QuestException;
+import org.betonquest.betonquest.instruction.Instruction;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,7 +12,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 
 public class SmeltingItem extends ItemObjective implements Listener {
-    public SmeltingItem(Instruction instruction) throws InstructionParseException {
+    public SmeltingItem(Instruction instruction) throws QuestException {
         super(instruction, "items_to_smelt");
     }
 
@@ -36,11 +36,10 @@ public class SmeltingItem extends ItemObjective implements Listener {
     public void onShiftSmelting(InventoryClickEvent event) {
         if (event.getInventory().getType().equals(InventoryType.FURNACE) && event.getRawSlot() == 2 && event.getClick()
                 .equals(ClickType.SHIFT_LEFT) && event.getWhoClicked() instanceof Player player) {
-            OnlineProfile profile = PlayerConverter.getID(player);
+            OnlineProfile profile = BetonQuest.getInstance().getProfileProvider().getProfile(player);
             if (containsPlayer(profile)) {
                 event.setCancelled(true);
             }
         }
     }
-
 }

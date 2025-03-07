@@ -9,6 +9,10 @@ import me.voten.betonquestitemsadder.events.PlayAnimation;
 import me.voten.betonquestitemsadder.events.SetBlockAt;
 import me.voten.betonquestitemsadder.objectives.*;
 import org.betonquest.betonquest.BetonQuest;
+import org.betonquest.betonquest.kernel.registry.quest.ConditionTypeRegistry;
+import org.betonquest.betonquest.kernel.registry.quest.EventTypeRegistry;
+import org.betonquest.betonquest.kernel.registry.quest.ObjectiveTypeRegistry;
+import org.betonquest.betonquest.kernel.registry.quest.QuestTypeRegistries;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -24,24 +28,27 @@ public class Main extends JavaPlugin {
         new Metrics(this, PLUGIN_METRICS_ID);
 
         BetonQuest betonQuest = BetonQuest.getInstance();
-        //conditions
-        betonQuest.registerConditions("iaitem", HasItems.class);
-        betonQuest.registerConditions("iawear", WearItems.class);
-        betonQuest.registerConditions("iahand", HasItemInHand.class);
-        betonQuest.registerConditions("iablockat", IsBlock.class);
-        //events
-        betonQuest.registerEvents("iaitem", ItemEvent.class);
-        betonQuest.registerEvents("iablockat", SetBlockAt.class);
-        betonQuest.registerEvents("iaplayanimation", PlayAnimation.class);
-        //objectives
-        betonQuest.registerObjectives("iacraft", CraftingItem.class);
-        betonQuest.registerObjectives("iapickup", PickupItem.class);
-        betonQuest.registerObjectives("iablockbreak", BlockBreak.class);
-        betonQuest.registerObjectives("iablockplace", BlockPlace.class);
-        betonQuest.registerObjectives("iaenchantitem", EnchantItem.class);
-        betonQuest.registerObjectives("iasmeltingitems", SmeltingItem.class);
+        QuestTypeRegistries questRegistries = betonQuest.getQuestRegistries();
+
+        ConditionTypeRegistry condition = questRegistries.condition();
+        condition.register("iaitem", HasItems.class);
+        condition.register("iawear", WearItems.class);
+        condition.register("iahand", HasItemInHand.class);
+        condition.register("iablockat", IsBlock.class);
+
+        EventTypeRegistry event = questRegistries.event();
+        event.register("iaitem", ItemEvent.class);
+        event.register("iablockat", SetBlockAt.class);
+        event.register("iaplayanimation", PlayAnimation.class);
+
+        ObjectiveTypeRegistry objective = questRegistries.objective();
+        objective.register("iacraft", CraftingItem.class);
+        objective.register("iapickup", PickupItem.class);
+        objective.register("iablockbreak", BlockBreak.class);
+        objective.register("iablockplace", BlockPlace.class);
+        objective.register("iaenchantitem", EnchantItem.class);
+        objective.register("iasmeltingitems", SmeltingItem.class);
 
         getLogger().info("Plugin Successful Enabled");
     }
-
 }

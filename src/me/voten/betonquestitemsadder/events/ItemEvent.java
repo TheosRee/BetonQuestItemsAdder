@@ -2,11 +2,11 @@ package me.voten.betonquestitemsadder.events;
 
 import dev.lone.itemsadder.api.CustomStack;
 import me.voten.betonquestitemsadder.Validator;
-import org.betonquest.betonquest.Instruction;
 import org.betonquest.betonquest.api.QuestEvent;
-import org.betonquest.betonquest.api.profiles.Profile;
-import org.betonquest.betonquest.exceptions.InstructionParseException;
-import org.betonquest.betonquest.exceptions.QuestRuntimeException;
+import org.betonquest.betonquest.api.profile.Profile;
+import org.betonquest.betonquest.api.quest.QuestException;
+import org.betonquest.betonquest.instruction.Instruction;
+import org.betonquest.betonquest.instruction.argument.VariableArgument;
 import org.betonquest.betonquest.instruction.variable.VariableNumber;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -23,18 +23,18 @@ public class ItemEvent extends QuestEvent {
 
     private final Action action;
 
-    public ItemEvent(Instruction instruction) throws InstructionParseException {
+    public ItemEvent(Instruction instruction) throws QuestException {
         super(instruction, true);
         this.action = instruction.getEnum(Action.class);
         this.itemID = Validator.existingID(instruction.next());
-        this.amount = instruction.getVarNum(instruction.getOptional("amount", "1"), VariableNumber.NOT_LESS_THAN_ONE_CHECKER);
+        this.amount = instruction.get(instruction.getOptional("amount", "1"), VariableArgument.NUMBER_NOT_LESS_THAN_ONE);
     }
 
     @Override
-    protected Void execute(Profile profile) throws QuestRuntimeException {
+    protected Void execute(Profile profile) throws QuestException {
         CustomStack customStack = CustomStack.getInstance(itemID);
         if (customStack == null) {
-            throw new QuestRuntimeException("Invalid ItemsAdder Item: " + itemID);
+            throw new QuestException("Invalid ItemsAdder Item: " + itemID);
         }
         ItemStack itemStack = customStack.getItemStack();
         itemStack.setAmount(amount.getValue(profile).intValue());
@@ -54,7 +54,7 @@ public class ItemEvent extends QuestEvent {
                 }
             }
             case REMOVE -> inventory.removeItem(itemStack);
-            default -> throw new QuestRuntimeException("Unexpected value: " + action);
+            default -> throw new QuestException("Unexpected value: " + action);
         }
         return null;
     }

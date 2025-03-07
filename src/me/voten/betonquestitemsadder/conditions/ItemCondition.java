@@ -2,10 +2,11 @@ package me.voten.betonquestitemsadder.conditions;
 
 import dev.lone.itemsadder.api.CustomStack;
 import me.voten.betonquestitemsadder.Validator;
-import org.betonquest.betonquest.Instruction;
 import org.betonquest.betonquest.api.Condition;
-import org.betonquest.betonquest.api.profiles.Profile;
-import org.betonquest.betonquest.exceptions.InstructionParseException;
+import org.betonquest.betonquest.api.profile.Profile;
+import org.betonquest.betonquest.api.quest.QuestException;
+import org.betonquest.betonquest.instruction.Instruction;
+import org.betonquest.betonquest.instruction.argument.VariableArgument;
 import org.betonquest.betonquest.instruction.variable.VariableNumber;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -16,10 +17,10 @@ public abstract class ItemCondition extends Condition {
 
     protected final VariableNumber amount;
 
-    public ItemCondition(Instruction instruction) throws InstructionParseException {
+    public ItemCondition(Instruction instruction) throws QuestException {
         super(instruction, true);
         this.itemID = Validator.existingID(instruction.next());
-        this.amount = instruction.getVarNum(instruction.getOptional("amount", "1"), VariableNumber.NOT_LESS_THAN_ONE_CHECKER);
+        this.amount = instruction.get(instruction.getOptional("amount", "1"), VariableArgument.NUMBER_NOT_LESS_THAN_ONE);
     }
 
     protected PlayerInventory getPlayerInventory(Profile profile) {
@@ -33,5 +34,4 @@ public abstract class ItemCondition extends Condition {
         }
         return customStack.getNamespacedID().equals(itemID);
     }
-
 }

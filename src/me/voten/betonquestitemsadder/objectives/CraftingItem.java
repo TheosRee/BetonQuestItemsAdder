@@ -1,10 +1,10 @@
 package me.voten.betonquestitemsadder.objectives;
 
 import dev.lone.itemsadder.api.CustomStack;
-import org.betonquest.betonquest.Instruction;
-import org.betonquest.betonquest.api.profiles.OnlineProfile;
-import org.betonquest.betonquest.exceptions.InstructionParseException;
-import org.betonquest.betonquest.utils.PlayerConverter;
+import org.betonquest.betonquest.BetonQuest;
+import org.betonquest.betonquest.api.profile.OnlineProfile;
+import org.betonquest.betonquest.api.quest.QuestException;
+import org.betonquest.betonquest.instruction.Instruction;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class CraftingItem extends ItemObjective implements Listener {
 
-    public CraftingItem(Instruction instruction) throws InstructionParseException {
+    public CraftingItem(Instruction instruction) throws QuestException {
         super(instruction, "items_to_craft");
     }
 
@@ -24,7 +24,7 @@ public class CraftingItem extends ItemObjective implements Listener {
         if (!(event.getWhoClicked() instanceof Player player)) {
             return;
         }
-        OnlineProfile profile = PlayerConverter.getID(player);
+        OnlineProfile profile = BetonQuest.getInstance().getProfileProvider().getProfile(player);
         if (!containsPlayer(profile)) {
             return;
         }
@@ -61,5 +61,4 @@ public class CraftingItem extends ItemObjective implements Listener {
         }
         return remainingSpace;
     }
-
 }

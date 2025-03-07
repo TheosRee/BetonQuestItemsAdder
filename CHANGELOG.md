@@ -1,4 +1,4 @@
 For the documentation see the README on the main page.
 
-- validate amount with new variableNumber methods
-- fix using removed method in VariableNumber
+- now uses BQ 3.0.0-DEV-94 as compatible version
+    - BQ Dev versions are highly unstable at this point and the AddOn could break any time!
