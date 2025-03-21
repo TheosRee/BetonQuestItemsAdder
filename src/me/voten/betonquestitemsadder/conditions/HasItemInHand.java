@@ -1,17 +1,18 @@
 package me.voten.betonquestitemsadder.conditions;
 
-import org.betonquest.betonquest.api.profile.Profile;
+import org.betonquest.betonquest.api.profile.OnlineProfile;
 import org.betonquest.betonquest.api.quest.QuestException;
-import org.betonquest.betonquest.instruction.Instruction;
+import org.betonquest.betonquest.instruction.variable.VariableNumber;
 import org.bukkit.inventory.ItemStack;
 
 public class HasItemInHand extends ItemCondition {
-    public HasItemInHand(Instruction instruction) throws QuestException {
-        super(instruction);
+
+    public HasItemInHand(String itemID, VariableNumber amount) {
+        super(itemID, amount);
     }
 
     @Override
-    protected Boolean execute(Profile profile) throws QuestException {
+    public boolean check(OnlineProfile profile) throws QuestException {
         ItemStack hand = getPlayerInventory(profile).getItemInMainHand();
 
         if (isItem(hand)) {

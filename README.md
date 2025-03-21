@@ -4,7 +4,7 @@
 <br>
 <img src="https://i.imgur.com/UbPfFHT.png" alt="bg.png" class="bbCodeImage LbImage" style="">
 <dt>BetonQuest Version:</dt>
-<dd>2.1.3-SNAPSHOT +</dd>
+<dd>3.0.0-DEV-114</dd>
 </dl>
 <dl class="customResourceFieldmc_versions">
 <dt>ItemsAdder Version:</dt>

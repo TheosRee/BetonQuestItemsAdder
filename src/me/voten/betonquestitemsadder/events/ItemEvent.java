@@ -1,12 +1,9 @@
 package me.voten.betonquestitemsadder.events;
 
 import dev.lone.itemsadder.api.CustomStack;
-import me.voten.betonquestitemsadder.Validator;
-import org.betonquest.betonquest.api.QuestEvent;
-import org.betonquest.betonquest.api.profile.Profile;
+import org.betonquest.betonquest.api.profile.OnlineProfile;
 import org.betonquest.betonquest.api.quest.QuestException;
-import org.betonquest.betonquest.instruction.Instruction;
-import org.betonquest.betonquest.instruction.argument.VariableArgument;
+import org.betonquest.betonquest.api.quest.event.online.OnlineEvent;
 import org.betonquest.betonquest.instruction.variable.VariableNumber;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -16,22 +13,21 @@ import org.bukkit.inventory.PlayerInventory;
 
 import java.util.Map;
 
-public class ItemEvent extends QuestEvent {
+public class ItemEvent implements OnlineEvent {
     private final String itemID;
 
     private final VariableNumber amount;
 
     private final Action action;
 
-    public ItemEvent(Instruction instruction) throws QuestException {
-        super(instruction, true);
-        this.action = instruction.getEnum(Action.class);
-        this.itemID = Validator.existingID(instruction.next());
-        this.amount = instruction.get(instruction.getOptional("amount", "1"), VariableArgument.NUMBER_NOT_LESS_THAN_ONE);
+    public ItemEvent(String itemID, VariableNumber amount, Action action) {
+        this.itemID = itemID;
+        this.amount = amount;
+        this.action = action;
     }
 
     @Override
-    protected Void execute(Profile profile) throws QuestException {
+    public void execute(OnlineProfile profile) throws QuestException {
         CustomStack customStack = CustomStack.getInstance(itemID);
         if (customStack == null) {
             throw new QuestException("Invalid ItemsAdder Item: " + itemID);
@@ -56,7 +52,6 @@ public class ItemEvent extends QuestEvent {
             case REMOVE -> inventory.removeItem(itemStack);
             default -> throw new QuestException("Unexpected value: " + action);
         }
-        return null;
     }
 
     public enum Action {

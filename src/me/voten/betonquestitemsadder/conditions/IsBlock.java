@@ -1,28 +1,25 @@
 package me.voten.betonquestitemsadder.conditions;
 
 import dev.lone.itemsadder.api.CustomBlock;
-import me.voten.betonquestitemsadder.Validator;
-import org.betonquest.betonquest.api.Condition;
 import org.betonquest.betonquest.api.profile.Profile;
 import org.betonquest.betonquest.api.quest.QuestException;
-import org.betonquest.betonquest.instruction.Instruction;
+import org.betonquest.betonquest.api.quest.condition.nullable.NullableCondition;
 import org.betonquest.betonquest.instruction.variable.location.VariableLocation;
 
-public class IsBlock extends Condition {
-    protected final String itemID;
+import javax.annotation.Nullable;
 
-    protected final VariableLocation location;
+public class IsBlock implements NullableCondition {
+    private final String itemID;
 
-    public IsBlock(Instruction instruction) throws QuestException {
-        super(instruction, true);
-        staticness = true;
-        persistent = true;
-        this.itemID = Validator.existingID(instruction.next());
-        this.location = instruction.get(VariableLocation::new);
+    private final VariableLocation location;
+
+    public IsBlock(String itemID, VariableLocation location) {
+        this.itemID = itemID;
+        this.location = location;
     }
 
     @Override
-    protected Boolean execute(Profile profile) throws QuestException {
+    public boolean check(@Nullable Profile profile) throws QuestException {
         CustomBlock block = CustomBlock.byAlreadyPlaced(location.getValue(profile).getBlock());
         return block != null && block.getCustomStack().getNamespacedID().equals(itemID);
     }

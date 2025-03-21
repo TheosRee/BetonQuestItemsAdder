@@ -1,17 +1,17 @@
 package me.voten.betonquestitemsadder.conditions;
 
-import org.betonquest.betonquest.api.profile.Profile;
+import org.betonquest.betonquest.api.profile.OnlineProfile;
 import org.betonquest.betonquest.api.quest.QuestException;
-import org.betonquest.betonquest.instruction.Instruction;
+import org.betonquest.betonquest.instruction.variable.VariableNumber;
 import org.bukkit.inventory.ItemStack;
 
 public class HasItems extends ItemCondition {
-    public HasItems(Instruction instruction) throws QuestException {
-        super(instruction);
+    public HasItems(String itemID, VariableNumber amount) {
+        super(itemID, amount);
     }
 
     @Override
-    protected Boolean execute(Profile profile) throws QuestException {
+    public boolean check(OnlineProfile profile) throws QuestException {
         ItemStack[] inventoryItems = getPlayerInventory(profile).getContents();
         int neededAmount = amount.getValue(profile).intValue();
         int actualAmount = 0;
