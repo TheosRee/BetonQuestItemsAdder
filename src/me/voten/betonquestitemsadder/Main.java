@@ -1,13 +1,10 @@
 package me.voten.betonquestitemsadder;
 
-import me.voten.betonquestitemsadder.conditions.HasItemInHandConditionFactory;
-import me.voten.betonquestitemsadder.conditions.HasItemsConditionFactory;
 import me.voten.betonquestitemsadder.conditions.IsBlockConditionFactory;
-import me.voten.betonquestitemsadder.conditions.WearItemsConditionFactory;
-import me.voten.betonquestitemsadder.events.ItemEventFactory;
 import me.voten.betonquestitemsadder.events.PlayAnimationEventFactory;
 import me.voten.betonquestitemsadder.events.SetBlockAtEventFactory;
-import me.voten.betonquestitemsadder.objectives.*;
+import me.voten.betonquestitemsadder.objectives.BlockBreak;
+import me.voten.betonquestitemsadder.objectives.BlockPlace;
 import org.betonquest.betonquest.BetonQuest;
 import org.betonquest.betonquest.api.logger.BetonQuestLoggerFactory;
 import org.betonquest.betonquest.kernel.registry.quest.ConditionTypeRegistry;
@@ -37,23 +34,16 @@ public class Main extends JavaPlugin {
         QuestTypeRegistries questRegistries = betonQuest.getQuestRegistries();
 
         ConditionTypeRegistry condition = questRegistries.condition();
-        condition.register("iaitem", new HasItemsConditionFactory(loggerFactory, data));
-        condition.register("iawear", new WearItemsConditionFactory(loggerFactory, data));
-        condition.register("iahand", new HasItemInHandConditionFactory(loggerFactory, data));
+        betonQuest.getFeatureRegistries().item().register("ia", new ItemFactory());
         condition.registerCombined("iablockat", new IsBlockConditionFactory(data));
 
         EventTypeRegistry event = questRegistries.event();
-        event.register("iaitem", new ItemEventFactory(loggerFactory, data));
         event.register("iablockat", new SetBlockAtEventFactory(data));
         event.register("iaplayanimation", new PlayAnimationEventFactory(loggerFactory, data));
 
         ObjectiveTypeRegistry objective = questRegistries.objective();
-        objective.register("iacraft", CraftingItem.class);
-        objective.register("iapickup", PickupItem.class);
         objective.register("iablockbreak", BlockBreak.class);
         objective.register("iablockplace", BlockPlace.class);
-        objective.register("iaenchantitem", EnchantItem.class);
-        objective.register("iasmeltingitems", SmeltingItem.class);
 
         getLogger().info("Plugin Successful Enabled");
     }

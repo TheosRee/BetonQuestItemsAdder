@@ -4,12 +4,29 @@
 <br>
 <img src="https://i.imgur.com/UbPfFHT.png" alt="bg.png" class="bbCodeImage LbImage" style="">
 <dt>BetonQuest Version:</dt>
-<dd>3.0.0-DEV-114</dd>
+<dd>3.0.0-DEV-XXX</dd>
 </dl>
 <dl class="customResourceFieldmc_versions">
 <dt>ItemsAdder Version:</dt>
 <dd>2.1.25 +</dd>
 </dl>
+</div>
+
+// TODO Items section with example
+Now uses BQ conditions and events for most stuff!
+<div>
+items:
+  ruby: ia itemsadder:ruby
+</div>
+
+<div>
+conditions:
+  hasRuby: item ruby
+</div>
+
+<div>
+events:
+  giveRuby: give ruby
 </div>
 
 <br>
@@ -48,12 +65,6 @@
 <img src="https://i.imgur.com/gBvlyBh.png" alt="events.png" class="bbCodeImage LbImage" style="">
 <ul>
     <li>
-        <i>'iaitem &lt;ADD/REMOVE> &lt;itemID> [amount:x]'</i>
-        <ul>
-            <b>Adds/Removes items to/from player’s inventory</b>
-        </ul>
-    </li>
-    <li>
         <i>'iablockat &lt;blockID> &lt;x;y;z;world>'</i>
         <ul>
             <b>Changes the block at the given position</b>
@@ -71,19 +82,6 @@
 <img src="https://i.imgur.com/47WqR3y.png" alt="objectives.png" class="bbCodeImage LbImage" style="">
 <ul>
     <li>
-        <i>'iacraft &lt;itemID> [amount:x]'</i>
-        <ul>
-            <b>To complete this objective the player must craft specified item</b>
-        </ul>
-    </li>
-    <li>
-        <i>'iapickup &lt;itemID> [amount:x] [notify]'</i>
-        <ul>
-            <span style="color: #8000ff"><i>e.g. 'iapickup itemsadder:ruby amount:3 notify'</i></span><br>
-            <b>To complete this objective you need to pick up the specified amount of items</b>
-        </ul>
-    </li>
-    <li>
         <i>'iablockbreak &lt;blockID> [amount:x] [notify:number]'</i>
         <ul>
             <span style="color: #8000ff"><i>e.g. iablockbreak itemsadder:ruby_ore amount:5 notify:1'</i></span><br>
@@ -96,11 +94,4 @@
             <b>To complete this objective player must place specified amount of blocks</b>
         </ul>
     </li>
-</ul>
-
-<br>
-<img src="https://i.imgur.com/eTVKRqj.png" alt="todo.png" class="bbCodeImage LbImage" style="">
-<ul>
-    <li><b>Create Enchant objective documentation</b></li>
-    <li><b>Create Smelting objective documentation</b></li>
 </ul>
