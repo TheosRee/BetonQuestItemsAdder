@@ -2,6 +2,7 @@ package me.voten.betonquestitemsadder.events;
 
 import dev.lone.itemsadder.api.CustomBlock;
 import dev.lone.itemsadder.api.CustomStack;
+import me.voten.betonquestitemsadder.VariableCustomStack;
 import org.betonquest.betonquest.api.profile.Profile;
 import org.betonquest.betonquest.api.quest.QuestException;
 import org.betonquest.betonquest.api.quest.event.PlayerEvent;
@@ -9,11 +10,11 @@ import org.betonquest.betonquest.instruction.variable.location.VariableLocation;
 import org.bukkit.Location;
 
 public class SetBlockAt implements PlayerEvent {
-    private final String itemID;
+    private final VariableCustomStack itemID;
 
     private final VariableLocation location;
 
-    public SetBlockAt(String itemID, VariableLocation location) {
+    public SetBlockAt(VariableCustomStack itemID, VariableLocation location) {
         this.itemID = itemID;
         this.location = location;
     }
@@ -21,10 +22,7 @@ public class SetBlockAt implements PlayerEvent {
     @Override
     public void execute(Profile profile) throws QuestException {
         Location loc = location.getValue(profile);
-        CustomStack customStack = CustomStack.getInstance(itemID);
-        if (customStack == null) {
-            throw new QuestException("Invalid ItemsAdder Item: " + itemID);
-        }
+        CustomStack customStack = itemID.getValue(profile);
         if (!customStack.isBlock()) {
             throw new QuestException("ItemsAdder Item is not a block: " + itemID);
         }

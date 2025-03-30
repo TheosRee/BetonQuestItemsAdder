@@ -1,6 +1,6 @@
 package me.voten.betonquestitemsadder.conditions;
 
-import me.voten.betonquestitemsadder.Validator;
+import me.voten.betonquestitemsadder.VariableCustomStack;
 import org.betonquest.betonquest.api.quest.QuestException;
 import org.betonquest.betonquest.api.quest.condition.PlayerCondition;
 import org.betonquest.betonquest.api.quest.condition.PlayerConditionFactory;
@@ -43,7 +43,7 @@ public class IsBlockConditionFactory implements PlayerConditionFactory, Playerle
     }
 
     private IsBlock parseInstruction(Instruction instruction) throws QuestException {
-        String itemID = Validator.existingID(instruction.next());
+        VariableCustomStack itemID = instruction.get(VariableCustomStack::new);
         VariableLocation location = instruction.get(VariableLocation::new);
         return new IsBlock(itemID, location);
     }

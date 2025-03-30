@@ -1,6 +1,6 @@
 package me.voten.betonquestitemsadder.events;
 
-import me.voten.betonquestitemsadder.Validator;
+import me.voten.betonquestitemsadder.VariableCustomStack;
 import org.betonquest.betonquest.api.quest.QuestException;
 import org.betonquest.betonquest.api.quest.event.PlayerEvent;
 import org.betonquest.betonquest.api.quest.event.PlayerEventFactory;
@@ -29,7 +29,7 @@ public class SetBlockAtEventFactory implements PlayerEventFactory {
 
     @Override
     public PlayerEvent parsePlayer(Instruction instruction) throws QuestException {
-        String itemID = Validator.existingID(instruction.next());
+        VariableCustomStack itemID = instruction.get(VariableCustomStack::new);
         VariableLocation location = instruction.get(VariableLocation::new);
         return new PrimaryServerThreadEvent(new SetBlockAt(itemID, location), data);
     }
