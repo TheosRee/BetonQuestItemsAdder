@@ -1,4 +1,5 @@
 For the documentation see the README on the main page.
 
-- now uses BQ 3.0.0-DEV-114 as compatible version
+- now uses BQ 3.0.0-DEV-217 as compatible version
     - BQ Dev versions are highly unstable at this point and the AddOn could break any time!
+- removed most IA specific events, which are covered by the new Item System
