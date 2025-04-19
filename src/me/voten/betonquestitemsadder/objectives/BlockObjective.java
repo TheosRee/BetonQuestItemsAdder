@@ -7,7 +7,7 @@ import org.betonquest.betonquest.api.logger.BetonQuestLogger;
 import org.betonquest.betonquest.api.profile.OnlineProfile;
 import org.betonquest.betonquest.api.quest.QuestException;
 import org.betonquest.betonquest.instruction.Instruction;
-import org.betonquest.betonquest.instruction.argument.VariableArgument;
+import org.betonquest.betonquest.instruction.variable.VariableNumber;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -18,11 +18,11 @@ public class BlockObjective extends CountingObjective implements Listener {
 
     private final BetonQuestLogger log;
 
-    public BlockObjective(Instruction instruction, String notifyMessageName) throws QuestException {
-        super(instruction, notifyMessageName);
-        this.itemID = instruction.get(VariableCustomStack::new);
-        this.targetAmount = instruction.get(instruction.getOptional("amount", "1"), VariableArgument.NUMBER_NOT_LESS_THAN_ONE);
-        this.log = BetonQuest.getInstance().getLoggerFactory().create(getClass());
+    public BlockObjective(Instruction instruction, VariableNumber targetAmount, String message, BetonQuestLogger log,
+            VariableCustomStack itemID) throws QuestException {
+        super(instruction, targetAmount, message);
+        this.log = log;
+        this.itemID = itemID;
     }
 
     protected void handle(String namespacedID, Player player) {

@@ -3,8 +3,8 @@ package me.voten.betonquestitemsadder;
 import me.voten.betonquestitemsadder.conditions.IsBlockConditionFactory;
 import me.voten.betonquestitemsadder.events.PlayAnimationEventFactory;
 import me.voten.betonquestitemsadder.events.SetBlockAtEventFactory;
-import me.voten.betonquestitemsadder.objectives.BlockBreak;
-import me.voten.betonquestitemsadder.objectives.BlockPlace;
+import me.voten.betonquestitemsadder.objectives.BlockBreakObjectiveFactory;
+import me.voten.betonquestitemsadder.objectives.BlockPlaceObjectiveFactory;
 import org.betonquest.betonquest.BetonQuest;
 import org.betonquest.betonquest.api.logger.BetonQuestLoggerFactory;
 import org.betonquest.betonquest.kernel.registry.quest.ConditionTypeRegistry;
@@ -42,8 +42,8 @@ public class Main extends JavaPlugin {
         event.register("iaplayanimation", new PlayAnimationEventFactory(loggerFactory, data));
 
         ObjectiveTypeRegistry objective = questRegistries.objective();
-        objective.register("iablockbreak", BlockBreak.class);
-        objective.register("iablockplace", BlockPlace.class);
+        objective.register("iablockbreak", new BlockBreakObjectiveFactory(loggerFactory));
+        objective.register("iablockplace", new BlockPlaceObjectiveFactory(loggerFactory));
 
         getLogger().info("Plugin Successful Enabled");
     }
