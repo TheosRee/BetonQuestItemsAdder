@@ -1,6 +1,7 @@
 package me.voten.betonquestitemsadder.conditions;
 
-import me.voten.betonquestitemsadder.VariableCustomStack;
+import dev.lone.itemsadder.api.CustomStack;
+import me.voten.betonquestitemsadder.CustomStackParser;
 import org.betonquest.betonquest.api.quest.QuestException;
 import org.betonquest.betonquest.api.quest.condition.PlayerCondition;
 import org.betonquest.betonquest.api.quest.condition.PlayerConditionFactory;
@@ -8,10 +9,12 @@ import org.betonquest.betonquest.api.quest.condition.PlayerlessCondition;
 import org.betonquest.betonquest.api.quest.condition.PlayerlessConditionFactory;
 import org.betonquest.betonquest.api.quest.condition.nullable.NullableConditionAdapter;
 import org.betonquest.betonquest.instruction.Instruction;
-import org.betonquest.betonquest.instruction.variable.location.VariableLocation;
+import org.betonquest.betonquest.instruction.argument.Argument;
+import org.betonquest.betonquest.instruction.variable.Variable;
 import org.betonquest.betonquest.quest.PrimaryServerThreadData;
 import org.betonquest.betonquest.quest.condition.PrimaryServerThreadPlayerCondition;
 import org.betonquest.betonquest.quest.condition.PrimaryServerThreadPlayerlessCondition;
+import org.bukkit.Location;
 
 /**
  * Factory to create {@link IsBlock}s from {@link Instruction}s.
@@ -43,8 +46,8 @@ public class IsBlockConditionFactory implements PlayerConditionFactory, Playerle
     }
 
     private IsBlock parseInstruction(Instruction instruction) throws QuestException {
-        VariableCustomStack itemID = instruction.get(VariableCustomStack::new);
-        VariableLocation location = instruction.get(VariableLocation::new);
+        Variable<CustomStack> itemID = instruction.getVariable(CustomStackParser.CUSTOM_STACK_PARSER);
+        Variable<Location> location = instruction.getVariable(Argument.LOCATION);
         return new IsBlock(itemID, location);
     }
 }

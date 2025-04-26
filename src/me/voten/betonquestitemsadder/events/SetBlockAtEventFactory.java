@@ -1,13 +1,16 @@
 package me.voten.betonquestitemsadder.events;
 
-import me.voten.betonquestitemsadder.VariableCustomStack;
+import dev.lone.itemsadder.api.CustomStack;
+import me.voten.betonquestitemsadder.CustomStackParser;
 import org.betonquest.betonquest.api.quest.QuestException;
 import org.betonquest.betonquest.api.quest.event.PlayerEvent;
 import org.betonquest.betonquest.api.quest.event.PlayerEventFactory;
 import org.betonquest.betonquest.instruction.Instruction;
-import org.betonquest.betonquest.instruction.variable.location.VariableLocation;
+import org.betonquest.betonquest.instruction.argument.Argument;
+import org.betonquest.betonquest.instruction.variable.Variable;
 import org.betonquest.betonquest.quest.PrimaryServerThreadData;
 import org.betonquest.betonquest.quest.event.PrimaryServerThreadEvent;
+import org.bukkit.Location;
 
 /**
  * Factory to {@link SetBlockAt}s from {@link Instruction}s.
@@ -29,8 +32,8 @@ public class SetBlockAtEventFactory implements PlayerEventFactory {
 
     @Override
     public PlayerEvent parsePlayer(Instruction instruction) throws QuestException {
-        VariableCustomStack itemID = instruction.get(VariableCustomStack::new);
-        VariableLocation location = instruction.get(VariableLocation::new);
+        Variable<CustomStack> itemID = instruction.getVariable(CustomStackParser.CUSTOM_STACK_PARSER);
+        Variable<Location> location = instruction.getVariable(Argument.LOCATION);
         return new PrimaryServerThreadEvent(new SetBlockAt(itemID, location), data);
     }
 }

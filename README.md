@@ -4,7 +4,7 @@
 <br>
 <img src="https://i.imgur.com/UbPfFHT.png" alt="bg.png" class="bbCodeImage LbImage" style="">
 <dt>BetonQuest Version:</dt>
-<dd>3.0.0-DEV-217</dd>
+<dd>3.0.0-DEV-245</dd>
 </dl>
 <dl class="customResourceFieldmc_versions">
 <dt>ItemsAdder Version:</dt>
@@ -16,8 +16,8 @@ Now uses BQ conditions and events for most stuff!
 
 <b>Example</b>:
 <div>
-items:  
-<br>&nbsp;&nbsp;
+items:
+<br>&nbsp&nbsp;
 ruby: ia itemsadder:ruby
 
 conditions:

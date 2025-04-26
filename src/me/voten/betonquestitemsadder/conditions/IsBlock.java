@@ -1,20 +1,21 @@
 package me.voten.betonquestitemsadder.conditions;
 
 import dev.lone.itemsadder.api.CustomBlock;
-import me.voten.betonquestitemsadder.VariableCustomStack;
+import dev.lone.itemsadder.api.CustomStack;
 import org.betonquest.betonquest.api.profile.Profile;
 import org.betonquest.betonquest.api.quest.QuestException;
 import org.betonquest.betonquest.api.quest.condition.nullable.NullableCondition;
-import org.betonquest.betonquest.instruction.variable.location.VariableLocation;
+import org.betonquest.betonquest.instruction.variable.Variable;
+import org.bukkit.Location;
 
 import javax.annotation.Nullable;
 
 public class IsBlock implements NullableCondition {
-    private final VariableCustomStack itemID;
+    private final Variable<CustomStack> itemID;
 
-    private final VariableLocation location;
+    private final Variable<Location> location;
 
-    public IsBlock(VariableCustomStack itemID, VariableLocation location) {
+    public IsBlock(Variable<CustomStack> itemID, Variable<Location> location) {
         this.itemID = itemID;
         this.location = location;
     }

@@ -1,25 +1,25 @@
 package me.voten.betonquestitemsadder.objectives;
 
-import me.voten.betonquestitemsadder.VariableCustomStack;
+import dev.lone.itemsadder.api.CustomStack;
 import org.betonquest.betonquest.BetonQuest;
 import org.betonquest.betonquest.api.CountingObjective;
 import org.betonquest.betonquest.api.logger.BetonQuestLogger;
 import org.betonquest.betonquest.api.profile.OnlineProfile;
 import org.betonquest.betonquest.api.quest.QuestException;
 import org.betonquest.betonquest.instruction.Instruction;
-import org.betonquest.betonquest.instruction.variable.VariableNumber;
+import org.betonquest.betonquest.instruction.variable.Variable;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 
 public class BlockObjective extends CountingObjective implements Listener {
-    protected final VariableCustomStack itemID;
+    protected final Variable<CustomStack> itemID;
 
     private final BetonQuestLogger log;
 
-    public BlockObjective(Instruction instruction, VariableNumber targetAmount, String message, BetonQuestLogger log,
-            VariableCustomStack itemID) throws QuestException {
+    public BlockObjective(Instruction instruction, Variable<Number> targetAmount, String message, BetonQuestLogger log,
+            Variable<CustomStack> itemID) throws QuestException {
         super(instruction, targetAmount, message);
         this.log = log;
         this.itemID = itemID;
@@ -33,7 +33,7 @@ public class BlockObjective extends CountingObjective implements Listener {
                 completeIfDoneOrNotify(profile);
             }
         } catch (QuestException e) {
-            log.warn("Could not resolve Item Variable: " + e.getMessage(), e);
+            log.warn("Could not resolve Item Variable in objective '" + instruction.getID() + "': " + e.getMessage(), e);
         }
     }
 
