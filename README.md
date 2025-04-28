@@ -14,6 +14,9 @@
 
 Now uses BQ conditions and events for most stuff!
 
+Search for ["Item"](https://betonquest.org/DEV/Documentation/Scripting/About-Scripting/?q=item)
+on the BetonQuest documentation to see how you can use them.
+
 <b>Example</b>:
 <div>
 items:
@@ -30,28 +33,11 @@ giveRuby: give ruby
 </div>
 
 <br>
+<h2>This plugin also adds the following to BetonQuest:</h2>
+<br>
+
 <img src="https://i.imgur.com/zqWCGJp.png" alt="conditions.png" class="bbCodeImage LbImage" style="">
 <ul>
-    <li>
-        <i>'iaitem &lt;itemID> [amount:x]'</i>
-        <ul>
-            <span style="color: #8000ff"><i>e.g. 'iaitem itemsadder:ruby amount:4'</i></span><br>
-            <b>Check if the player has all specified items in his inventory</b>
-        </ul>
-    </li>
-    <li>
-        <i>'iawear &lt;itemID>'</i>
-        <ul>
-            <span style="color: #8000ff"><i>e.g 'iawear itemsadder:ruby_helmet'</i></span><br>
-            <b>Check if the player is wearing specified armor</b>
-        </ul>
-    </li>
-    <li>
-        <i>'iahand &lt;itemID> [amount:x]'</i>
-        <ul>
-            <b>Check if the player is holding a specified item in his hand</b>
-        </ul>
-    </li>
     <li>
         <i>'iablockat &lt;blockID> &lt;x;y;z;world>'</i>
         <ul>
