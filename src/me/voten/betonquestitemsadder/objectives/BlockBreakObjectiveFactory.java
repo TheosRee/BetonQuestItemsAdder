@@ -20,8 +20,8 @@ public class BlockBreakObjectiveFactory implements ObjectiveFactory {
 
     @Override
     public Objective parseInstruction(Instruction instruction) throws QuestException {
-        Variable<CustomStack> itemID = instruction.getVariable(CustomStackParser.CUSTOM_STACK_PARSER);
-        Variable<Number> targetAmount = instruction.getVariable(instruction.getOptional("amount", "1"), Argument.NUMBER_NOT_LESS_THAN_ONE);
+        Variable<CustomStack> itemID = instruction.get(CustomStackParser.CUSTOM_STACK_PARSER);
+        Variable<Number> targetAmount = instruction.getValue("amount", Argument.NUMBER_NOT_LESS_THAN_ONE, 1);
         BetonQuestLogger log = loggerFactory.create(BlockObjective.class);
         return new BlockBreak(instruction, targetAmount, log, itemID);
     }

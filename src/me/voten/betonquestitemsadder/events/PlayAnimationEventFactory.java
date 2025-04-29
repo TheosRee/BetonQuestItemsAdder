@@ -38,7 +38,7 @@ public class PlayAnimationEventFactory implements PlayerEventFactory {
 
     @Override
     public PlayerEvent parsePlayer(Instruction instruction) throws QuestException {
-        Variable<String> animation = instruction.getVariable(Argument.STRING);
+        Variable<String> animation = instruction.get(Argument.STRING);
         return new PrimaryServerThreadEvent(new OnlineEventAdapter(
                 new PlayAnimation(animation),
                 loggerFactory.create(PlayAnimation.class),

@@ -46,8 +46,8 @@ public class IsBlockConditionFactory implements PlayerConditionFactory, Playerle
     }
 
     private IsBlock parseInstruction(Instruction instruction) throws QuestException {
-        Variable<CustomStack> itemID = instruction.getVariable(CustomStackParser.CUSTOM_STACK_PARSER);
-        Variable<Location> location = instruction.getVariable(Argument.LOCATION);
+        Variable<CustomStack> itemID = instruction.get(CustomStackParser.CUSTOM_STACK_PARSER);
+        Variable<Location> location = instruction.get(Argument.LOCATION);
         return new IsBlock(itemID, location);
     }
 }
