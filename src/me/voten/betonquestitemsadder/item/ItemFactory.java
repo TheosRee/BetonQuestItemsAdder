@@ -1,4 +1,4 @@
-package me.voten.betonquestitemsadder;
+package me.voten.betonquestitemsadder.item;
 
 import dev.lone.itemsadder.api.CustomStack;
 import org.betonquest.betonquest.api.quest.QuestException;
@@ -14,6 +14,6 @@ public class ItemFactory implements TypeFactory<QuestItem> {
         if (customStack == null) {
             throw new QuestException("Invalid ItemsAdder stack: " + itemId);
         }
-        return new ItemsAdderQuestItem(itemId);
+        return new ItemsAdderItem(itemId);
     }
 }

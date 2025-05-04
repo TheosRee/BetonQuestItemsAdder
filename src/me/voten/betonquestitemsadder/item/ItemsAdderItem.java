@@ -1,4 +1,4 @@
-package me.voten.betonquestitemsadder;
+package me.voten.betonquestitemsadder.item;
 
 import dev.lone.itemsadder.api.CustomStack;
 import org.betonquest.betonquest.api.profile.Profile;
@@ -8,11 +8,11 @@ import org.bukkit.inventory.ItemStack;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemsAdderQuestItem implements QuestItem {
+public class ItemsAdderItem implements QuestItem {
 
     private final String itemID;
 
-    public ItemsAdderQuestItem(String itemID) {this.itemID = itemID;}
+    public ItemsAdderItem(String itemID) {this.itemID = itemID;}
 
     @Override
     public String getName() {

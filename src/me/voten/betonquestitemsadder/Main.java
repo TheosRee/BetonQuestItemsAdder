@@ -3,10 +3,13 @@ package me.voten.betonquestitemsadder;
 import me.voten.betonquestitemsadder.conditions.IsBlockConditionFactory;
 import me.voten.betonquestitemsadder.events.PlayAnimationEventFactory;
 import me.voten.betonquestitemsadder.events.SetBlockAtEventFactory;
+import me.voten.betonquestitemsadder.item.ItemFactory;
+import me.voten.betonquestitemsadder.item.ItemSerializer;
 import me.voten.betonquestitemsadder.objectives.BlockBreakObjectiveFactory;
 import me.voten.betonquestitemsadder.objectives.BlockPlaceObjectiveFactory;
 import org.betonquest.betonquest.BetonQuest;
 import org.betonquest.betonquest.api.logger.BetonQuestLoggerFactory;
+import org.betonquest.betonquest.kernel.registry.feature.ItemTypeRegistry;
 import org.betonquest.betonquest.kernel.registry.quest.ConditionTypeRegistry;
 import org.betonquest.betonquest.kernel.registry.quest.EventTypeRegistry;
 import org.betonquest.betonquest.kernel.registry.quest.ObjectiveTypeRegistry;
@@ -34,7 +37,9 @@ public class Main extends JavaPlugin {
         QuestTypeRegistries questRegistries = betonQuest.getQuestRegistries();
 
         ConditionTypeRegistry condition = questRegistries.condition();
-        betonQuest.getFeatureRegistries().item().register("ia", new ItemFactory());
+        ItemTypeRegistry item = betonQuest.getFeatureRegistries().item();
+        item.register("ia", new ItemFactory());
+        item.registerSerializer("ia", new ItemSerializer());
         condition.registerCombined("iablockat", new IsBlockConditionFactory(data));
 
         EventTypeRegistry event = questRegistries.event();
