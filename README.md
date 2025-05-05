@@ -14,18 +14,24 @@
 
 Now uses BQ conditions and events for most stuff!
 
-Search for ["Item"](https://betonquest.org/DEV/Documentation/Scripting/About-Scripting/?q=item)
+Search for "[Item](https://betonquest.org/DEV/Documentation/Scripting/About-Scripting/?q=item)"
 on the BetonQuest documentation to see how you can use them.
+
+You define the item with a category and name like you would in the <b><i>iagive</i></b> command.
 
 <b>Example</b>:
 <div>
 items:
-<br>&nbsp&nbsp;
-ruby: ia itemsadder:ruby
+<br>&nbsp;&nbsp;
+ruby: ia iasurvival:ruby
+<br>&nbsp;&nbsp;
+sword: ia iaalchemy:mysterious_sword
 
 conditions:
 <br>&nbsp;&nbsp;
 hasRuby: item ruby
+<br>&nbsp;&nbsp;
+swordHand: hand sword
 
 events:
 <br>&nbsp;&nbsp;
