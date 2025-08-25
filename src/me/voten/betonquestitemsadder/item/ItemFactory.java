@@ -1,8 +1,8 @@
 package me.voten.betonquestitemsadder.item;
 
 import me.voten.betonquestitemsadder.CustomStackParser;
+import org.betonquest.betonquest.api.instruction.Instruction;
 import org.betonquest.betonquest.api.quest.QuestException;
-import org.betonquest.betonquest.instruction.Instruction;
 import org.betonquest.betonquest.item.QuestItemWrapper;
 import org.betonquest.betonquest.kernel.registry.TypeFactory;
 

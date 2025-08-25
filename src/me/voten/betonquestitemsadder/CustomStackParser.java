@@ -1,8 +1,8 @@
 package me.voten.betonquestitemsadder;
 
 import dev.lone.itemsadder.api.CustomStack;
+import org.betonquest.betonquest.api.instruction.argument.Argument;
 import org.betonquest.betonquest.api.quest.QuestException;
-import org.betonquest.betonquest.instruction.argument.Argument;
 import org.betonquest.betonquest.util.Utils;
 
 /**
