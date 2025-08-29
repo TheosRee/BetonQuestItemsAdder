@@ -47,8 +47,8 @@ public class Main extends JavaPlugin {
         event.register("iaplayanimation", new PlayAnimationEventFactory(loggerFactory, data));
 
         ObjectiveTypeRegistry objective = questRegistries.objective();
-        objective.register("iablockbreak", new BlockBreakObjectiveFactory(loggerFactory));
-        objective.register("iablockplace", new BlockPlaceObjectiveFactory(loggerFactory));
+        objective.register("iablockbreak", new BlockBreakObjectiveFactory());
+        objective.register("iablockplace", new BlockPlaceObjectiveFactory());
 
         getLogger().info("Plugin Successful Enabled");
     }

@@ -4,15 +4,14 @@ import dev.lone.itemsadder.api.CustomStack;
 import dev.lone.itemsadder.api.Events.CustomBlockPlaceEvent;
 import org.betonquest.betonquest.api.instruction.Instruction;
 import org.betonquest.betonquest.api.instruction.variable.Variable;
-import org.betonquest.betonquest.api.logger.BetonQuestLogger;
 import org.betonquest.betonquest.api.quest.QuestException;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 
 public class BlockPlace extends BlockObjective {
-    public BlockPlace(Instruction instruction, Variable<Number> targetAmount, BetonQuestLogger log, Variable<CustomStack> itemID)
+    public BlockPlace(Instruction instruction, Variable<Number> targetAmount, Variable<CustomStack> itemID)
             throws QuestException {
-        super(instruction, targetAmount, "blocks_to_place", log, itemID);
+        super(instruction, targetAmount, "blocks_to_place", itemID);
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
