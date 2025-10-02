@@ -8,13 +8,14 @@ import me.voten.betonquestitemsadder.item.ItemSerializer;
 import me.voten.betonquestitemsadder.objectives.BlockBreakObjectiveFactory;
 import me.voten.betonquestitemsadder.objectives.BlockPlaceObjectiveFactory;
 import org.betonquest.betonquest.BetonQuest;
+import org.betonquest.betonquest.api.Objective;
+import org.betonquest.betonquest.api.kernel.FeatureTypeRegistry;
 import org.betonquest.betonquest.api.logger.BetonQuestLoggerFactory;
-import org.betonquest.betonquest.kernel.registry.feature.ItemTypeRegistry;
-import org.betonquest.betonquest.kernel.registry.quest.ConditionTypeRegistry;
-import org.betonquest.betonquest.kernel.registry.quest.EventTypeRegistry;
-import org.betonquest.betonquest.kernel.registry.quest.ObjectiveTypeRegistry;
-import org.betonquest.betonquest.kernel.registry.quest.QuestTypeRegistries;
-import org.betonquest.betonquest.quest.PrimaryServerThreadData;
+import org.betonquest.betonquest.api.quest.PrimaryServerThreadData;
+import org.betonquest.betonquest.api.quest.QuestTypeRegistries;
+import org.betonquest.betonquest.api.quest.condition.ConditionRegistry;
+import org.betonquest.betonquest.api.quest.event.EventRegistry;
+import org.betonquest.betonquest.item.ItemRegistry;
 import org.bukkit.Server;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -36,17 +37,17 @@ public class Main extends JavaPlugin {
         PrimaryServerThreadData data = new PrimaryServerThreadData(server, server.getScheduler(), betonQuest);
         QuestTypeRegistries questRegistries = betonQuest.getQuestRegistries();
 
-        ConditionTypeRegistry condition = questRegistries.condition();
-        ItemTypeRegistry item = betonQuest.getFeatureRegistries().item();
+        ConditionRegistry condition = questRegistries.condition();
+        ItemRegistry item = betonQuest.getFeatureRegistries().item();
         item.register("ia", new ItemFactory());
         item.registerSerializer("ia", new ItemSerializer());
         condition.registerCombined("iablockat", new IsBlockConditionFactory(data));
 
-        EventTypeRegistry event = questRegistries.event();
+        EventRegistry event = questRegistries.event();
         event.register("iablockat", new SetBlockAtEventFactory(data));
         event.register("iaplayanimation", new PlayAnimationEventFactory(loggerFactory, data));
 
-        ObjectiveTypeRegistry objective = questRegistries.objective();
+        FeatureTypeRegistry<Objective> objective = questRegistries.objective();
         objective.register("iablockbreak", new BlockBreakObjectiveFactory());
         objective.register("iablockplace", new BlockPlaceObjectiveFactory());
 

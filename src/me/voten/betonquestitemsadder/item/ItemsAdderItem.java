@@ -1,6 +1,7 @@
 package me.voten.betonquestitemsadder.item;
 
 import dev.lone.itemsadder.api.CustomStack;
+import net.kyori.adventure.text.Component;
 import org.betonquest.betonquest.api.profile.Profile;
 import org.betonquest.betonquest.item.QuestItem;
 import org.bukkit.inventory.ItemStack;
@@ -35,17 +36,17 @@ public class ItemsAdderItem implements QuestItem {
     }
 
     @Override
-    public String getName() {
-        return stack.getDisplayName();
+    public Component getName() {
+        return Component.text(stack.getDisplayName());
     }
 
     @Override
-    public List<String> getLore() {
+    public List<Component> getLore() {
         ItemStack itemStack = stack.getItemStack();
         if (itemStack.hasItemMeta()) {
             ItemMeta meta = itemStack.getItemMeta();
             if (meta.hasLore()) {
-                return meta.getLore();
+                return meta.lore();
             }
         }
         return new ArrayList<>(0);
