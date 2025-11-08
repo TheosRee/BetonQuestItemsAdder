@@ -4,7 +4,7 @@
 <br>
 <img src="https://i.imgur.com/UbPfFHT.png" alt="bg.png" class="bbCodeImage LbImage" style="">
 <dt>BetonQuest Version:</dt>
-<dd>3.0.0-DEV-306</dd>
+<dd>3.0.0-DEV-444</dd>
 </dl>
 <dl class="customResourceFieldmc_versions">
 <dt>ItemsAdder Version:</dt>
@@ -19,6 +19,8 @@ on the BetonQuest documentation to see how you can use them.
 
 You define the item with a category and name like you would in the <b><i>iagive</i></b> command.
 
+In addition, you can also add the `quest-item` argument to tag it as "QuestItem".
+
 <b>Example</b>:
 <div>
 items:
@@ -26,6 +28,8 @@ items:
 ruby: ia iasurvival:ruby
 <br>&nbsp;&nbsp;
 sword: ia iaalchemy:mysterious_sword
+<br>&nbsp;&nbsp;
+questSword: ia iaalchemy:mysterious_sword quest-item
 
 conditions:
 <br>&nbsp;&nbsp;
