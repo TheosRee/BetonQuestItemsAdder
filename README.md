@@ -1,3 +1,7 @@
+<br>
+<h1>All additions of this plugin are now part of BetonQuest 3.0.0-DEV-589!</h1>
+<br>
+
 <div class="customResourceFields aboveInfo">
 <dl class="customResourceFieldnative_mc_version">
 
